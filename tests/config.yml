@@ -1,5 +1,0 @@
-apiVersion: v1
-kind: controller
-metadata:
-  name: controller
-spec:

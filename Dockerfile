@@ -1,12 +1,10 @@
-FROM golang:latest AS build-stage
-WORKDIR /go/src/app
+FROM rust:latest AS builder
+WORKDIR /usr/src/controller
 COPY . .
-RUN apt update && \
-    apt install -y upx
-RUN make build
+RUN make install && \
+    make build
 
-FROM gcr.io/distroless/base-debian11 AS production-stage
-WORKDIR /
-COPY --from=build-stage /go/src/app/bin/controller /
+FROM gcr.io/distroless/base-debian11
+COPY --from=builder /usr/src/controller/target/release/controller /usr/local/bin/controller
 USER nonroot:nonroot
-ENTRYPOINT ["/controller"]
+ENTRYPOINT ["controller"]
