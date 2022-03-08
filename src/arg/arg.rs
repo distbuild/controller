@@ -1,4 +1,4 @@
-use clap::{App, Command};
+use clap::{Arg, Command};
 use std::error::Error;
 
 #[derive(Clone, Default)]
