@@ -1,4 +1,4 @@
-use clap::{App, Arg};
+use clap::{App, Command};
 use std::error::Error;
 
 #[derive(Clone, Default)]
@@ -12,7 +12,7 @@ impl Argument {
         self.version_info =
             concat!(env!("CARGO_PKG_VERSION"), "-build-", env!("build")).to_string();
 
-        let matches = App::new("controller")
+        let matches = Command::new("controller")
             .version(&*self.version_info)
             .arg(
                 Arg::new("config_file")
