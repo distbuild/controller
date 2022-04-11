@@ -4,7 +4,6 @@ COPY . .
 RUN make install && \
     make build
 
-FROM gcr.io/distroless/base-debian11
+FROM scratch
 COPY --from=builder /usr/src/controller/target/release/controller /usr/local/bin/controller
-USER nonroot:nonroot
 ENTRYPOINT ["controller"]
